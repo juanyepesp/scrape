@@ -5,19 +5,9 @@ import pandas as pd
 # get data
 df = pd.read_csv("tucarro+demanda+depreciacion.csv")
 
-
 model = ConcreteModel()
 
 C = range(len(df)) # carros
-
-# this is the correct way of defining the parameters
-# model.c = Param(model.i, model.j, initialize={(i, j): value for (i, j), value in {
-#     (1, 1): 300, (1, 2): 500,\
-#     (2, 1): 200, (2, 2): 300,\
-#     (3, 1): 600, (3, 2): 300,
-# }.items()}) # c[i, j] costo de transmision
-
-# model.p = Param(C, initialize={i: df["Precio"][i] for i in C}.items()) # precio p_i
 
 m = {i: int(df["Modelo"][i]) for i in C}
 model.m = Param(C, initialize=m)
